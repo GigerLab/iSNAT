@@ -1,0 +1,2 @@
+# CellRanger to Final Seurat Object
+These files show how CellRanger output was handled through to the Seurat object that you can download from GEO. Running these scripts would require the CellRanger output which could be supplied with reasonable requests. However, To run the RShiny server it would be preferable to start from the Final Seurat objects (.RDS) which you can download from GEO: GSE198582
