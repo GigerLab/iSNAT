@@ -24,13 +24,17 @@ s7_obj <- CreateSeuratObject(counts = S2, project = "WT_NoDrug_2")
 obj.list <- list(WT_B1,s3_obj,s4_obj,s6_obj,s7_obj)
 
 ## SCTransform
-sum(unlist(lapply(obj.list, function(X){ncol(X)})))
+## Raw number of cells from Kalinski Paper
+sum(unlist(lapply(obj.list[1:2], function(X){ncol(X)})))
+## Raw number of new cells
+sum(unlist(lapply(obj.list[3:5], function(X){ncol(X)})))
 obj.list <- lapply(obj.list, function(X){
     X <- PercentageFeatureSet(X, pattern = "mt-", col.name="percent.mt")
     X <- subset(X, subset=nFeature_RNA > 500 & nFeature_RNA < 7500 & percent.mt < 15)
     X <- SCTransform(X,vars.to.regress='percent.mt',verbose=T)
 })
-sum(unlist(lapply(obj.list, function(X){ncol(X)})))
+sum(unlist(lapply(obj.list[1:2], function(X){ncol(X)})))
+sum(unlist(lapply(obj.list[3:5], function(X){ncol(X)})))
 
 ## CCA Integration
 obj.features <- SelectIntegrationFeatures(obj.list, nfeatures=3000)
@@ -41,8 +45,15 @@ anchors <- FindIntegrationAnchors(object.list=obj.list, normalization.method="SC
 Final_Seurat <- IntegrateData(anchorset=anchors, normalization.method="SCT")
 
 ## Stats for Table
-median(Final_Seurat$nCount_RNA)
-median(Final_Seurat$nFeature_RNA)
+ix <- c(which(grepl('-1_1',colnames(Final_Seurat))),
+        which(grepl('-1_2',colnames(Final_Seurat))))
+median(Final_Seurat$nCount_RNA[ix])
+median(Final_Seurat$nFeature_RNA[ix])
+ix <- c(which(grepl('-1_3',colnames(Final_Seurat))),
+        which(grepl('-1_4',colnames(Final_Seurat))),
+        which(grepl('-1_5',colnames(Final_Seurat))))
+median(Final_Seurat$nCount_RNA[ix])
+median(Final_Seurat$nFeature_RNA[ix])
 
 rm(list=ls(pattern="^a|^o|^s|^S|^W"))
 

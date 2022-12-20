@@ -134,6 +134,7 @@ ui <- dashboardPage(
           tabItems(
               tabItem(tabName = 'Home',
                       fluidPage(
+                          tags$head(includeHTML(("www/google-analytics.html"))),
                           useWaiter(),
                           waiter_preloader(html=waiting_screen),
                           includeMarkdown('Intro_1.md'),
