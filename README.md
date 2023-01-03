@@ -1,6 +1,6 @@
 # This Repository contains the code to locally run the **Injured Sciatic Nerve Atlas (iSNAT) described in this [eLife publication](https://doi.org/10.7554/eLife.80881 "The Injured Sciatic Nerve Atlas (iSNAT), insights into the cellular and molecular basis of neural tissue degeneration and regeneration")**  
 
-![Workflow for peripheral nervous tissue analysis](cartoon.png)
+![Workflow for peripheral nervous tissue analysis](./Cartoon.png)
 
 # Order of events needed to run application
 
